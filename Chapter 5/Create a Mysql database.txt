@@ -1,0 +1,26 @@
+Create a Mysql database
+
+Create database sampleDB;
+
+Create a Table
+
+Create table salary(
+	empno INT NOT Null,
+	salary INT,
+	Primary Key (empno)
+	);
+
+Reference two tables's empno column
+
+Alter Table salary add foreign Key (empno) References emps (empno);
+
+Create a table with reference
+
+create table orders(
+pono Int not null,
+empno int not null,
+total int,
+primary key (pono),
+foreign key (empno) references emps (empno)
+);
+

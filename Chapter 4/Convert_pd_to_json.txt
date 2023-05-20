@@ -1,0 +1,35 @@
+.apply(lambda x: x[['Pono', 'Total']])
+
+                Pono  Total
+Emp
+Jane Boorman 3  2621     95
+             4  2626    218
+Jeff Russell 0  2608     35
+             1  2617     35
+             2  2620    139
+
+.to_dict('records')
+Emp
+Jane Boorman    [{'Pono': 2621, 'Total': 95}, {'Pono': 2626, '...
+Jeff Russell    [{'Pono': 2608, 'Total': 35}, {'Pono': 2617, '...
+
+.reset_index()
+            Emp                                                  0
+0  Jane Boorman  [{'Pono': 2621, 'Total': 95}, {'Pono': 2626, '...
+1  Jeff Russell  [{'Pono': 2608, 'Total': 35}, {'Pono': 2617, '...
+
+.rename(columns={0:'POs'})
+            Emp                                                POs
+0  Jane Boorman  [{'Pono': 2621, 'Total': 95}, {'Pono': 2626, '...
+1  Jeff Russell  [{'Pono': 2608, 'Total': 35}, {'Pono': 2617, '...
+
+.to_json(orient='records')
+[
+    {"Emp":"Jane Boorman",
+        "POs":[{"Pono":2621,"Total":95},
+               {"Pono":2626,"Total":218}]},
+    {"Emp":"Jeff Russell",
+        "POs":[{"Pono":2608,"Total":35},
+               {"Pono":2617,"Total":35},
+               {"Pono":2620,"Total":139}]}
+]

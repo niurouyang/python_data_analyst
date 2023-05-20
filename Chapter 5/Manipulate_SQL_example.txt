@@ -1,0 +1,29 @@
+use sampledb;
+select
+date,
+ticker,
+price,
+lag(price) over(partition by ticker order by date) as prev_price
+# lag function is an analytical SQL function. It lets you access a previous row's data from the current row.
+# partition by cause divide the dataset into groups, one for each ticker.
+from stocks;
+# the query generated a new column, prev_price, containing the previous day's stock prices.
+
+
+# The SQL statement is a join between two different queries issued againt the same stocks table.
+select s.* from stocks as s
+# retrieves all the rows from the stocks table
+# retrieves only the names of those tickers whose prices dropped 1 percent or more below their previous day's
+# price at least once over the period of analysis.
+ 
+left join
+(select distinct(ticker) from
+# select data from a subquery rather than from the stocks table directly.
+# use distinct function to the ticker field to eliminate duplicate ticker names from the result set.
+	(select price/lag(price) over(partition by ticker order by date) as dif,ticker from stocks) as b
+       where dif< 0.99) as a
+	# retrieves those rows from the table whose values in the price field are at least 1 percent 
+	#lower than in the previous row.
+on a.ticker= s.ticker
+where a.ticker is null;
+# filter out the data that store in a(Which have more than 1% drop or dif<0.99)    

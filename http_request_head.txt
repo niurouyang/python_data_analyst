@@ -1,0 +1,12 @@
+GET /api/books?bibkeys=ISBN%3A1718500521&format=json Http/1.1
+# GET HTTP command to retrieve data from the given server
+Host: openlibrary.org
+# indicated host
+User-Agent: python-requests/2.24.0
+# User-Agent request header identifiers the application making the request and its version
+Accept-Encoding: gzip,deflate
+# Accept-Encoding Advertise which content types the client is able to understand
+Accept:*/*
+Connection:keep-alive
+# Connection header, set to keep-alive, instructs the server to establish a persistent connection to the client
+# which allows for subsequent requests to be made
